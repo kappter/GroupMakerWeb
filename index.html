@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Create classroom groups from a CSV roster. Processing stays in your browser."
+    />
+    <title>GroupMaker</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#" aria-label="GroupMaker home">
+        <span class="brand-mark" aria-hidden="true">GM</span>
+        <span>GroupMaker</span>
+      </a>
+      <div class="privacy-badge">
+        <span class="privacy-dot" aria-hidden="true"></span>
+        Local processing only
+      </div>
+    </header>
+
+    <main class="page-shell">
+      <section class="hero" aria-labelledby="page-title">
+        <p class="eyebrow">Teacher-controlled classroom grouping</p>
+        <h1 id="page-title">Turn a roster into useful groups.</h1>
+        <p class="hero-copy">
+          Drop in a CSV, choose a grouping approach, and get classroom-ready
+          teams in seconds. Student data stays on this device.
+        </p>
+      </section>
+
+      <div class="workspace">
+        <section class="panel controls-panel" aria-labelledby="setup-title">
+          <div class="panel-heading">
+            <div>
+              <p class="step-label">Step 1</p>
+              <h2 id="setup-title">Add your roster</h2>
+            </div>
+            <button id="clearButton" class="text-button" type="button" hidden>
+              Start over
+            </button>
+          </div>
+
+          <label id="dropZone" class="drop-zone" for="fileInput">
+            <input id="fileInput" type="file" accept=".csv,text/csv" />
+            <span class="upload-icon" aria-hidden="true">↑</span>
+            <strong>Drop a CSV roster here</strong>
+            <span>or choose a file from your device</span>
+            <small>Nothing is uploaded or saved.</small>
+          </label>
+
+          <div id="importSummary" class="import-summary" hidden>
+            <div>
+              <strong id="fileName">Roster loaded</strong>
+              <span id="studentCount"></span>
+            </div>
+            <span class="success-mark" aria-label="Successfully loaded">✓</span>
+          </div>
+
+          <div id="configuration" hidden>
+            <div class="divider"></div>
+
+            <div class="section-heading">
+              <p class="step-label">Step 2</p>
+              <h2>Confirm the columns</h2>
+            </div>
+
+            <div class="field-grid">
+              <label>
+                Student name
+                <select id="nameColumn"></select>
+              </label>
+              <label>
+                Performance <span class="optional">(optional)</span>
+                <select id="performanceColumn"></select>
+              </label>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="section-heading">
+              <p class="step-label">Step 3</p>
+              <h2>Build the groups</h2>
+            </div>
+
+            <fieldset class="segmented-field">
+              <legend>Organize by</legend>
+              <div class="segmented-control">
+                <label>
+                  <input type="radio" name="sizeMode" value="count" checked />
+                  <span>Number of groups</span>
+                </label>
+                <label>
+                  <input type="radio" name="sizeMode" value="size" />
+                  <span>Students per group</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <label class="range-field">
+              <span class="range-label">
+                <span id="rangeTitle">Number of groups</span>
+                <output id="groupValue" for="groupRange">2</output>
+              </span>
+              <input id="groupRange" type="range" min="2" max="2" value="2" />
+              <span class="range-scale">
+                <span>2</span>
+                <span id="rangeMaximum">2</span>
+              </span>
+            </label>
+
+            <label>
+              Grouping strategy
+              <select id="strategy">
+                <option value="random">Pure random</option>
+                <option value="balanced">Balanced performance</option>
+                <option value="high-low">High–low distribution</option>
+                <option value="similar">Similar readiness</option>
+              </select>
+            </label>
+            <p id="strategyHelp" class="field-help">
+              Shuffles every student with no academic weighting.
+            </p>
+
+            <button id="generateButton" class="primary-button" type="button">
+              Generate groups
+            </button>
+            <p id="formMessage" class="form-message" role="alert"></p>
+          </div>
+        </section>
+
+        <section class="panel results-panel" aria-labelledby="results-title">
+          <div class="panel-heading">
+            <div>
+              <p class="step-label">Results</p>
+              <h2 id="results-title">Your groups</h2>
+            </div>
+            <div id="resultActions" class="result-actions" hidden>
+              <button id="copyButton" class="secondary-button" type="button">
+                Copy
+              </button>
+              <button id="printButton" class="secondary-button" type="button">
+                Print
+              </button>
+            </div>
+          </div>
+
+          <div id="emptyState" class="empty-state">
+            <div class="empty-illustration" aria-hidden="true">
+              <span></span><span></span><span></span>
+            </div>
+            <h3>Groups will appear here</h3>
+            <p>Import a roster and choose your settings to begin.</p>
+          </div>
+
+          <div id="resultsSummary" class="results-summary" hidden></div>
+          <div id="groupsGrid" class="groups-grid" aria-live="polite"></div>
+        </section>
+      </div>
+
+      <section class="privacy-note">
+        <div aria-hidden="true">⌂</div>
+        <div>
+          <h2>Your roster stays yours.</h2>
+          <p>
+            GroupMaker reads the CSV in your browser. It does not transmit,
+            store, infer, or track student information.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>GroupMaker · Built for teachers · Local by design</p>
+    </footer>
+  </body>
+</html>
