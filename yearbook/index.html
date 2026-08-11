@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="An interactive starting-point assessment for Skyline Yearbook staff.">
+  <title>Skyline Yearbook Role Compass</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap hero-inner">
+      <p class="eyebrow">Skyline Yearbook • 2026–2027</p>
+      <h1>Yearbook Role Compass</h1>
+      <p class="dek">Discover where you might contribute now—and where you could grow.</p>
+      <div class="hero-note">This is a conversation starter, not a permanent job assignment.</div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section id="intro" class="panel intro-panel">
+      <div>
+        <p class="kicker">One book. Two crews. Many ways to matter.</p>
+        <h2>There is no single “yearbook person.”</h2>
+        <p>A finished spread needs curiosity, accuracy, visual judgment, follow-through, and people who notice what others miss. Answer honestly; uncertainty is useful information.</p>
+      </div>
+      <div class="start-card">
+        <label for="studentName">Your name</label>
+        <input id="studentName" type="text" autocomplete="name" maxlength="70" placeholder="First and last name">
+        <label for="classPeriod">Class period</label>
+        <input id="classPeriod" type="text" maxlength="20" placeholder="Example: A1">
+        <button id="startBtn" class="primary" type="button">Begin the compass <span aria-hidden="true">→</span></button>
+        <p class="privacy">Your responses remain on this device until you copy, print, or download your summary.</p>
+      </div>
+    </section>
+
+    <section id="survey" class="hidden" aria-live="polite">
+      <div class="progress-shell">
+        <div class="progress-meta"><span id="stepLabel">Step 1 of 4</span><span id="progressPercent">25%</span></div>
+        <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
+      </div>
+      <form id="compassForm" novalidate>
+        <div id="questionStage"></div>
+        <p id="formMessage" class="form-message" role="alert"></p>
+        <div class="nav-row">
+          <button id="backBtn" class="secondary" type="button">← Back</button>
+          <button id="nextBtn" class="primary" type="button">Continue →</button>
+        </div>
+      </form>
+    </section>
+
+    <section id="results" class="hidden results" aria-live="polite">
+      <div class="result-heading">
+        <div><p class="eyebrow dark">Your starting profile</p><h2 id="resultTitle">Your Role Compass</h2></div>
+        <button id="restartBtn" class="text-button" type="button">Start over</button>
+      </div>
+      <div id="topRoles" class="top-roles"></div>
+      <div class="profile-grid">
+        <article class="panel"><h3>Six-lens profile</h3><div id="scoreBars" class="score-bars"></div></article>
+        <article class="panel"><h3>What your profile suggests</h3><div id="interpretation"></div></article>
+      </div>
+      <article class="panel summary-panel">
+        <h3>Your adviser-ready summary</h3>
+        <p>Edit nothing here; this collects your results and reflections into one submission-ready record.</p>
+        <textarea id="summaryText" readonly aria-label="Result summary"></textarea>
+        <div class="action-row">
+          <button id="copyBtn" class="primary" type="button">Copy summary</button>
+          <button id="downloadBtn" class="secondary" type="button">Download .txt</button>
+          <button id="printBtn" class="secondary" type="button">Print / Save PDF</button>
+        </div>
+        <p id="copyStatus" class="copy-status" role="status"></p>
+      </article>
+    </section>
+  </main>
+
+  <footer><div class="wrap">Skyline High School Yearbook • Honest answers create stronger crews.</div></footer>
+  <script src="script.js"></script>
+</body>
+</html>
